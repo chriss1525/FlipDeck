@@ -1,3 +1,11 @@
+from Deck import create_deck
+from Flashcards import create_flashcard
+from progress import create_progress
+from user import register
+from Deck import Deck
+from Flashcards import Flashcard
+from progress import Progress
+from user import User
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
@@ -6,18 +14,17 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@localhost/FlipDeck
 db = SQLAlchemy(app)
 
 # Import the models
-from user import User
-from progress import Progress
-from Flashcards import Flashcard
-from Deck import Deck
 
 # Import the routes
-from user import register
-from progress import create_progress
-from Flashcards import create_flashcard
-from Deck import create_deck
 
 # Add the routes to the Flask app
+
+
+@app.route('/')
+def home():
+    return 'Welcome to the home page!'
+
+
 app.add_url_rule('/register', methods=['POST'], view_func=register)
 app.add_url_rule('/progress', methods=['POST'], view_func=create_progress)
 app.add_url_rule('/flashcards', methods=['POST'], view_func=create_flashcard)
