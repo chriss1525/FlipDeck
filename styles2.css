@@ -1,0 +1,56 @@
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -150px; /* Adjust the margin to position the card */
+  width: 100%;
+  height: 100vh;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px;
+  max-width: 100px;
+  height: 150px;
+  background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(28, 52, 80, 1));
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.card-header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: auto;
+  text-align: center;
+  color: white;
+}
+
+.card-body {
+  font-size: 16px;
+  text-align: center;
+  color: rgb(245, 237, 237);
+  flex-grow: 1;
+}
+
+.card-footer {
+  font-size: 14px;
+  color: rgb(190, 186, 186);
+  font-style: italic;
+  text-align: right;
+}
+
+.add-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-add-content {
+  font-size: 48px;
+  color: rgb(190, 186, 186);
+  max-width: 100px;
+}
