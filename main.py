@@ -6,23 +6,25 @@ from Deck import Deck
 from Flashcards import Flashcard
 from progress import Progress
 from user import User
-from flask import Flask
+from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@localhost/FlipDeck_name'
 db = SQLAlchemy(app)
 
-# Import the models
-
-# Import the routes
-
-# Add the routes to the Flask app
-
 
 @app.route('/')
 def home():
-    return 'Welcome to the home page!'
+    return render_template('homepage.html')
+
+@app.route('/deck')
+def deck():
+    return render_template('deck.html')
+
+@app.route('/create_deck')
+def create_deck():
+    return render_template('create_deck.html')
 
 
 app.add_url_rule('/register', methods=['POST'], view_func=register)

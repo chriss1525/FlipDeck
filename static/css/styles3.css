@@ -1,0 +1,36 @@
+.content:hover > .card {
+  cursor: pointer;
+  transform: rotateY(180deg);
+}
+
+.card {
+ width: 100%;
+ position: relative;
+ transition: transform 1500ms;
+ transform-style: preserve-3d;
+}
+
+.front, .back {
+ border-radius: 2rem;
+ box-shadow: 0 0 5px 2px rgba(50, 50, 50, 0.25);
+ position: absolute;
+ backface-visibility: hidden;
+}
+
+.front {
+  transform: rotateY(0);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+}
+
+.back{
+ transform: rotateY(180deg);
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ gap: 5rem;
+}

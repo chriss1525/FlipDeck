@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FlipDeck - Flashcards</title>
+    <link rel="stylesheet" href="../static/css/styles.css" />
+    <link rel="stylesheet" href="../static/css/styles2.css" />
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <img src="../static/images/logo.png" alt="Logo" />
+      </div>
+    </header>
+    <main>
+      <div class="banner"></div>
+      <div class="content">
+        <div class="card">
+          <div class="card-header">Math</div>
+          <div class="card-body">Multiplication</div>
+          <div class="card-footer">5 cards</div>
+        </div>
+        <form action="/create_deck" method="GET">
+        <a href="create_deck.html" class="btn-container">
+          <button type="button"><span></span>+</button>
+        </a>
+        </form>
+    </main>
+  </body>
+</html>
