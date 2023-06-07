@@ -26,6 +26,9 @@ def deck():
 def create_deck():
     return render_template('create_deck.html')
 
+@app.route('/answer')
+def answer():
+    return render_template('answer.html')
 
 app.add_url_rule('/register', methods=['POST'], view_func=register)
 app.add_url_rule('/progress', methods=['POST'], view_func=create_progress)
