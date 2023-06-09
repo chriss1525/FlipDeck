@@ -2,9 +2,11 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@localhost/FlipDeck_name'
-db = SQLAlchemy(app)
+from flask import render_template
+from app import create_app
+
+db = SQLAlchemy()
+app = create_app()
 
 # Define the Progress model
 

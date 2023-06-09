@@ -3,9 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import bcrypt
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root@localhost/FlipDeck_name'
-db = SQLAlchemy(app)
+from flask import render_template
+from app import create_app
+
+db = SQLAlchemy()
+app = create_app()
 
 # Define the Flashcard model
 
@@ -26,16 +28,21 @@ class Flashcard(db.Model):
 
 
 # Route for creating a flashcard
+@app.route('/flashcard')
+def new_flashcard():
+    return render_template('flashcard.html')
+
 @app.route('/flashcards', methods=['POST'])
 def create_flashcard():
     # Retrieve flashcard data from the request
-    front_text = request.json['front_text']
-    back_text = request.json['back_text']
+    front_text = request.form['Question']
+    back_text = request.form['answer']
+    explanation = request.form['Explanation']
     deck_id = request.json['deck_id']
 
     # Create a new flashcard object
     new_flashcard = Flashcard(front_text=front_text,
-                              back_text=back_text, deck_id=deck_id)
+                              back_text=back_text, explanation=explanation, deck_id=deck_id)
 
     # Save the new flashcard to the database
     db.session.add(new_flashcard)
