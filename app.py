@@ -9,14 +9,16 @@ from application.user import register
 from application.user import User
 from flask import Flask, render_template, request, jsonify
 import json
-from flask_login import current_user, LoginManager
-
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
     return render_template('homepage.html')
+
+@app.route('/homepage2')
+def home2():
+    return render_template('homepage2.html')
 
 @app.route('/deck')
 def deck():

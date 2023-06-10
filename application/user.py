@@ -1,13 +1,14 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, redirect, render_template
 from datetime import datetime
-from flask_login import current_user, LoginManager
+from flask_login import LoginManager, UserMixin, current_user, login_user, logout_user
 import bcrypt
 import json
 import os
 
 app = Flask(__name__)
 
-class User:
+
+class User(UserMixin):
     def __init__(self, name, password, email):
         self.name = name
         self.email = email
@@ -38,6 +39,23 @@ class User:
                 return cls(name=user_data['name'], password=user_data['password'], email=user_data['email'])
         return None
 
+
+    @classmethod
+    def get_user_by_email(cls, email):
+        # Retrieve a user by email from the JSON file
+        if not os.path.isfile('data.json'):
+            # If the file doesn't exist, create an empty JSON structure
+            with open('data.json', 'w') as file:
+                json.dump({'users': []}, file)
+        # Retrieve a user by email from the JSON file
+        with open('data.json', 'r') as file:
+            data = json.load(file)
+        for user_data in data['users']:
+            if user_data['email'] == email:
+                return cls(name=user_data['name'], password=user_data['password'], email=user_data['email'])
+        return None
+
+
     def save(self):
         # Save the user to the JSON file
         with open('data.json', 'r') as file:
@@ -54,25 +72,31 @@ class User:
     # Route for registering a user
 
 
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['POST', 'GET'])
 def register():
-    # Retrieve user data from the request
-    name = request.form['name']
-    password = request.form['password']
-    email = request.form['email']
+    if request.method == 'POST':
+        # Retrieve user data from the request
+        name = request.form['name']
+        password = request.form['password']
+        email = request.form['email']
 
-    # Check if a user with the same name already exists
-    existing_user = User.get_user_by_name(name)
-    if existing_user:
-        return jsonify({'message': 'Username already exists'})
+        # Check if a user with the same name already exists
+        existing_user = User.get_user_by_name(name)
+        if existing_user:
+            return render_template('signup.html', message='Username already exists')
 
-    # Create a new user object
-    new_user = User(name=name, password=password, email=email)
+        # Check if a user with the same email already exists
+        existing_email = User.get_user_by_email(email)
+        if existing_email:
+            return render_template('signup.html', message='Password already exists')
 
-    # Save the new user to the JSON file
-    new_user.save()
+        # Create a new user object
+        new_user = User(name=name, password=password, email=email)
 
-    return jsonify({'message': 'User registered successfully'})
+        # Save the new user to the JSON file
+        new_user.save()
+        return redirect('homepage2')
+    return render_template('signup.html')
 
 def get_user_by_name(name):
     # Load the users from the JSON file
@@ -88,7 +112,7 @@ def get_user_by_name(name):
 def load_users():
     with open('data.json', 'r') as file:
         users = json.load(file)
-    return User.get_user_by_name(user_id)
+    return users
 
 def save_user(user):
     # Load the existing users from the JSON file

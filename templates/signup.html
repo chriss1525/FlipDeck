@@ -23,6 +23,9 @@
         <input type="email" name="email" placeholder="email" required />
         <button type="submit" class="button button1"><span></span>SIGN UP</button>
       </form>
+      {% if message %}
+      <p class="error">{{ message }}</p>
+      {% endif %}
       </div>
       </div>
     </div>
