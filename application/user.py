@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify, redirect, render_template
 from datetime import datetime
-from flask_login import LoginManager, UserMixin, current_user, login_user, logout_user
 import bcrypt
 import json
 import os
@@ -8,7 +7,7 @@ import os
 app = Flask(__name__)
 
 
-class User(UserMixin):
+class User():
     def __init__(self, name, password, email):
         self.name = name
         self.email = email
@@ -97,6 +96,23 @@ def register():
         new_user.save()
         return redirect('homepage2')
     return render_template('signup.html')
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    if request.method == 'POST':
+        # Retrieve user data from the request
+        name = request.form['name']
+        password = request.form['password']
+
+        # Retrieve the user by name from the JSON file
+        user = User.get_user_by_name(name)
+
+        # Check if a username and password match
+        if user and user.check_password(password):
+            # Log in the user
+            return redirect('homepage2')
+        else:
+            return render_template('signup.html', message='Invalid username or password') 
 
 def get_user_by_name(name):
     # Load the users from the JSON file
