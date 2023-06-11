@@ -3,11 +3,17 @@ from datetime import datetime
 import bcrypt
 import json
 import os
+from flask_login import LoginManager, UserMixin, login_user, login_required
 
 app = Flask(__name__)
+app.secret_key = "where do I get this?"
+
+login_manager = LoginManager()
+login_manager.login_view = 'login'
+login_manager.init_app(app)
 
 
-class User():
+class User(UserMixin):
     def __init__(self, name, password, email):
         self.name = name
         self.email = email
@@ -97,22 +103,26 @@ def register():
         return redirect('homepage2')
     return render_template('signup.html')
 
-@app.route('/login', methods=['POST', 'GET'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        # Retrieve user data from the request
-        name = request.form['name']
-        password = request.form['password']
-
-        # Retrieve the user by name from the JSON file
+        name = request.form.get('name')
+        password = request.form.get('password')
+        remember_me = request.form.get('remember_me')
+        
         user = User.get_user_by_name(name)
-
-        # Check if a username and password match
+        
         if user and user.check_password(password):
-            # Log in the user
+            login_user(user, remember=remember_me)
             return redirect('homepage2')
-        else:
-            return render_template('signup.html', message='Invalid username or password') 
+        
+    return render_template('signup.html', message='Invalid username or password')
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect('/')
 
 def get_user_by_name(name):
     # Load the users from the JSON file
@@ -125,10 +135,14 @@ def get_user_by_name(name):
 
         return None
 
-def load_users():
-    with open('data.json', 'r') as file:
-        users = json.load(file)
-    return users
+#def load_users():
+ #   with open('data.json', 'r') as file:
+  #      users = json.load(file)
+   # return users
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get_user_by_name(user_id)   
 
 def save_user(user):
     # Load the existing users from the JSON file
@@ -142,4 +156,4 @@ def save_user(user):
         json.dump(users, file)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

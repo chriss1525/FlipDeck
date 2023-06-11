@@ -3,6 +3,7 @@ from application import user #Deck, Flashcards, progress, user
 #from application.Flashcards import create_flashcard
 #from application.progress import create_progress
 from application.user import register
+from application.user import login
 #from application.Deck import Deck
 #from application.Flashcards import Flashcard
 #from application.progress import Progress
@@ -42,6 +43,7 @@ def signup():
     return render_template('signup.html')
 
 app.add_url_rule('/register', methods=['POST'], view_func=register)
+app.add_url_rule('/login', methods=['POST'], view_func=login)
 #app.add_url_rule('/progress', methods=['POST'], view_func=create_progress)
 #app.add_url_rule('/flashcards', methods=['POST'], view_func=create_flashcard)
 #app.add_url_rule('/decks', methods=['POST'], view_func=create_deck)
