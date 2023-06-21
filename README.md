@@ -18,13 +18,12 @@ FlipDeck is a flashcards app that allows users to create, manage, and study flas
 - Flask (web framework)
 - SQLAlchemy (database toolkit)
 - HTML/CSS/JavaScript (Frontend)
-- MySQL (database)
 
 ## Usage
 
 - Create an account or log in if you already have one.
 - Create a new deck of flashcards.
-- Add flashcards to your deck, providing a question and an answer for each.
+- Add flashcards to your deck, providing a question, an answer and an explanation for each.
 - Study your flashcards, flipping them to reveal the answer.
 - Track your progress and performance in the progress section.
 

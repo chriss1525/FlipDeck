@@ -70,7 +70,17 @@
   position: absolute;
   top: 30%;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -150px; /*Adjust the margin to position the card */
   color: white;
+  /*height: 100vh;*/
+  flex-direction: column;
+  /*display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;*/
 }
 
 .content h1 {
@@ -111,6 +121,10 @@ button {
  width: 75%;
  height: 75%
 }
+.button3 {
+  width: 10%;
+  height: 10%;
+}
 
 span {
   background: #009688;
@@ -129,4 +143,8 @@ button:hover span {
 
 button:hover {
   border: none;
+}
+
+.text-white {
+  color: white;
 }
