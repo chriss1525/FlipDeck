@@ -67,6 +67,15 @@
   justify-content: center;
 }
 
+.signup-line {
+ position: absolute;
+ bottom: 10px;
+ left: 50%;
+ transform: translateX(-50%);
+ text-align: center;
+ width: 100%;
+}
+
 .button-box {
  width: 220px;
  margin: 35px auto;

@@ -75,12 +75,8 @@
   align-items: center;
   margin-top: -150px; /*Adjust the margin to position the card */
   color: white;
-  /*height: 100vh;*/
-  flex-direction: column;
-  /*display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;*/
+  height: 100vh;
+  flex-direction: column; 
 }
 
 .content h1 {

@@ -17,7 +17,8 @@
         <a href="/login">Login</a>
         <a href="/logout">Logout</a>
       </div-->
-    <div class="content">
+    </div>
+    <div class="form_instructions">
     {% block form_instructions %}
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -35,7 +36,6 @@
     {% endif %}
     {% endwith %}
     {% endblock %}
-    </div>
     </div>
     {% block body %}{% endblock %}
   </body>
