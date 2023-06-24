@@ -1,34 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FlipDeck - Flashcards</title>
-    <link rel="stylesheet" href="../static/css/styles.css" />
-    <link rel="stylesheet" href="../static/css/styles2.css" />
-  </head>
-  <body>
-    <header>
-      <div class="navbar">
-        <img src="../static/images/logo.png" alt="Logo" />
-      </div>
-    </header>
-    <main>
-      <div class="banner"></div>
-      <div class="content">
-        <form action="/create_deck" method="GET">
-          <a href="create_deck">
-        <div class="card">
-          <div class="card-body">Multiplication</div>
-          <div class="card-footer">5 cards</div>
-        </div>
-          </a>
-          </form>
-          <form action="/create_deck" method="GET">
-             <a href="create_deck"><button class="button button1"><span></span>+</button></a>
-          </form>
+{% extends "base.html" %}
 
-          </div>
-          </main>
-  </body>
-</html>
+{% block title %}
+  FlipDeck - Deck
+{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="../static/css/styles2.css">
+{% endblock %}
+{% block body %}
+      <div class="content">
+        <div class="card-container">
+        {% for deck in deck %}
+            <div class="card">
+              <div class="card-header">
+                <h3>{{ deck.title }}</h3>
+              </div>
+              <div class="card-body"></div>
+              <div class="card-footer">
+                <p>{{ deck.card_count }} cards</p>
+              </div>
+            </div>
+        {% endfor %}
+        </div>
+        <form action="/decks/create" method="GET">
+    <button class="button button1" type="submit"><span></span>ADD NEW DECK</button>
+  </form>
+
+      </div>
+{% endblock %}
+```

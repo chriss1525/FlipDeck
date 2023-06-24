@@ -4,7 +4,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin: 20px;
-  max-width: 100px;
+  width: 100px;
   height: 150px;
   background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(28, 52, 80, 1));
   display: flex;
@@ -13,12 +13,21 @@
   justify-content: space-between;
 }
 
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 .card-header {
-  font-size: 24px;
+  font-size: 14px;
   font-weight: bold;
   margin-bottom: auto;
   text-align: center;
   color: white;
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Add ellipsis (...) for long names */
+  white-space: nowrap; /* Prevent name from wrapping to new lines */
 }
 
 .card-body {
@@ -33,9 +42,7 @@
   color: rgb(190, 186, 186);
   font-style: italic;
   text-align: right;
-  display: flex;
-  justify-content: 20px;
-  margin-top: 20px
+  bottom: 0;
 }
 
 .add-card {
