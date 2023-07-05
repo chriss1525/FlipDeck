@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}
+  FlipDeck - Flashcards
+{% endblock %}
+
+{% block body %}
+  <div class="content">
+    <div class="card-container">
+      {% for card in flashcards %}
+        <div class="card">
+          <div class="card-inner">
+            <div class="card-front">
+              <h3>{{ card.question }}</h3>
+            </div>
+            <div class="card-back">
+              <h3>Answer:</h3>
+              <p><strong>{{ card.answer }}</strong></p>
+              <p>{{ card.explanation }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+      {% if not flashcards %}
+        <p>No flashcards found for this deck.</p>
+      {% endif %}
+    </div>
+    <form action="/decks/{{ deck_id }}/flashcards/create" method="GET">
+      <button class="button button1" type="submit"><span></span>ADD NEW CARD</button>
+    </form>
+  </div>
+{% endblock %}
+
