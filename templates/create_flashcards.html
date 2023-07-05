@@ -1,34 +1,24 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FlipDeck - Flashcards</title>
-    <link rel="stylesheet" href="../static/css/styles.css" />
-    <link rel="stylesheet" href="../static/css/styles2.css" />
-  </head>
-  <body>
-    <header>
-     <div class="navbar">
-      <img src="../static/images/logo.png" alt="Logo" />
-     </div>
-    </header>
-    <main>
-     <div class="banner"></div>
+{% extends "base.html" %}
+
+{% block title %}
+  FlipDeck - new deck
+{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet" href="../static/css/styles2.css">
+{% endblock %}
+{% block body %}
      <div class="content">
-       <div class="card">
-         <div class="question">
-           <form action="/answer" method="GET">
+       <div class="form-box form-box1">
+         <form action="/decks/create" method="POST">
              <label for="Question">Question:</label><br>
-             <input type="text" id="Question" name="Question" style="width: 80%";><br>
-             <button type="submit" class="button button2"><span></span>ENTER</button>
+             <input type="text" class="input-field" name="Question" required>
+             <label for="Answer">Answer:</label><br>
+             <input type="text" class="input-field" name="Answer" required>
+             <Label for="Explanation">Explain(Optional):</label><br>
+             <input type="text" class="input-field" name="Explanation">
+             <button type="submit" class="button button1"><span></span>ENTER</button>
            </form>
          </div>
            </div>
-       </div>
-     </div>
-     </div>
-    </main>
-    <footer></footer>
-  </body>
-</html>
+{% endblock %}

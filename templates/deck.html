@@ -11,7 +11,8 @@
       <div class="content">
         <div class="card-container">
         {% for deck in deck %}
-            <div class="card">
+         <a href="/decks/{{ deck.id }}/flashcards">
+          <div class="card">
               <div class="card-header">
                 <h3>{{ deck.title }}</h3>
               </div>
@@ -19,7 +20,8 @@
               <div class="card-footer">
                 <p>{{ deck.card_count }} cards</p>
               </div>
-            </div>
+          </div>
+        </a>
         {% endfor %}
         </div>
         <form action="/decks/create" method="GET">
