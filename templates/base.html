@@ -4,42 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}FlipDeck - Flashcards{% endblock %}</title>
-    <link rel="stylesheet" href="../static/css/styles.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
     {% block head %}{% endblock %}
   </head>
   <body>
     <div class="banner"></div>
     <div class="navbar">
       <a href="/">
-        <img src="../static/images/logo.png" alt="Logo" />
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
       </a>
+      <div class="form_instructions">
+        {% block form_instructions %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            {% if category == "error" %}
+              <div class="alert alert-danger alert-dismissable fade show" role="alert">
+                {{ message }}
+              </div>
+            {% else %}
+              <div class="alert alert-success alert-dismissable fade show" role="alert">
+                {{ message }} 
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+    {% endwith %}
+    {% endblock %}
+    </div>
+
       <div class="nav-links">
         <a href="/deck">Decks</a>
         <!--a href="/">Home</a>
         <a href="/register">Register</a>
         <a href="/login">Login</a-->
         <a href="/logout">Logout</a>
-      </div>
-    </div>
-    <div class="form_instructions">
-    {% block form_instructions %}
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    {% for category, message in messages %}
-    {% if category == "error" %}
-    <div class="alert alert-danger alert-dismissable fade show" role="alert">
-     {{ message }}
-    </div>
-    {% else %}
-    <div class="alert alert-success alert-dismissable fade show" role="alert">
-     {{ message }} 
-    </div>
-    {% endif %}
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
-    {% endblock %}
-    </div>
+      </div> 
+    </div> 
     {% block body %}{% endblock %}
   </body>
 </html>

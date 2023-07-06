@@ -35,7 +35,7 @@ def create_deck():
         print(new_deck)
 
         # Generate new static folder path based on deck id
-        new_deck.static_path = 'static/decks/' + str(new_deck.id)
+        #new_deck.static_path = 'static/decks/' + str(new_deck.id)
 
         # redirect to deck page
         return redirect(url_for('routes.flashcard', id=new_deck.id))
@@ -85,9 +85,9 @@ def create_flashcard(id):
         db.session.commit()
 
         # Redirect to the flashcards page
-        return redirect(url_for('routes.flashcards'))
+        return redirect(url_for('routes.flashcards', id=deck.id))
 
-    return render_template('create_flashcard.html', deck=deck, user=current_user)
+    return render_template('create_flashcards.html', deck=deck, user=current_user)
 
 @routes.route('/decks/<int:id>/flashcards/<int:card_id>/delete', methods=['GET', 'POST'])
 @login_required

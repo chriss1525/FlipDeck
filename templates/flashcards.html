@@ -1,6 +1,12 @@
 {% extends "base.html" %}
+
 {% block title %}
   FlipDeck - Flashcards
+{% endblock %}
+
+{% block head %}
+  <link rel="stylesheet"  href="{{ url_for('static', filename='css/styles2.css') }}">
+  <link rel="stylesheet"  href="{{ url_for('static', filename='css/styles3.css') }}">
 {% endblock %}
 
 {% block body %}
